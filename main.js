@@ -96,6 +96,7 @@ function displayOptions(json) {
 }
 
 function onChangeSelectedTownWeather(e) {
+    const regex = /\s/gi;
     debugger;
     const selectedTown = e.target.value;
     let filteredCities = [];
@@ -112,5 +113,5 @@ function onChangeSelectedTownWeather(e) {
     } else {
         town = selectedTown.substr(6);
     }
-    getTownWeather(town);
+    getTownWeather(town.replace(regex,'-'));
 }
