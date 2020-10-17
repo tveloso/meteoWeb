@@ -1,58 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Météo app</title>
+    <title>Météo app</title>
+    <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--Leaflet CSS, worldMap-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <!--My CSS-->
     <link rel="stylesheet" type="text/css" href="main.css">
+    <!--JS Libs for Bootstrap-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin="" defer></script>
-    <script type="text/javascript" src="classes.js" defer></script>
+    <!--Leaflet JS, worldMap-->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <!--My JS classes-->
+    <script type="text/javascript" src="Map.js"></script>
+    <script type="text/javascript" src="Weather.js"></script>
+    <script type="text/javascript" src="WeatherForecast.js"></script>
+    <script type="text/javascript" src="GPSPoint.js"></script>
+    <!--Main JS-->
     <script type="text/javascript" src="main.js" defer></script>
 </head>
 
 <body>
     <div id="menu" class="center">
-        <input type="text" id="town">
-        <button type="button" onclick="getTownsVicopo()">afficher</button>
-        <div id="select"></div>
-</div>
-    <div id="map"></div>
+        <input type="text" id="town" class="form-control">
+        <button id="go" class="btn btn-outline-secondary" type="button">GO</button>
+        <div id="select">
+        </div>
+    </div>
+    <div id="map">
 
-<template id="townsSelect">
-    <label for="townSelect">Choose a town:</label>
-    
-    <select name="town" id="townSelect">
-        <option value="">--Please choose an option--</option>
-    </select>
-</template>
+    </div>
 
-<template id="meteoDisplay">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4 mx-auto">
-            <div class="weather">
-                <div class="current">
-                    <div class="info">
-                        <div>&nbsp;</div>
-                        <div class="city"><small><small>CITY: </small></small></div>
-                        <div class="temp">&deg;<small> C</small></div>
-                        <div class="wind"><small><small>WIND: </small></small></div>
-                        <div>&nbsp;</div>
+    <template id="townsSelect">
+        <label for="townSelect">Choose a town:</label>
+        <select name="town" id="townSelect" class="custom-select mr-sm-2">
+            <option value="">--Please choose an option--</option>
+        </select>
+    </template>
+
+    <template id="meteoDisplay">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 mx-auto">
+                <div class="weather">
+                    <div class="current">
+                        <div class="info">
+                            <div>&nbsp;</div>
+                            <div class="city"><span class="small">CITY: </span></div>
+                            <div class="temp">&deg;<span class="small"> C</span></div>
+                            <div class="wind"><span class="small">WIND: </span></div>
+                            <div>&nbsp;</div>
+                        </div>
+                        <div class="icon">
+                            <span></span>
+                        </div>
                     </div>
-                    <div class="icon">
-                        <span></span>
+                    <div class="future">
                     </div>
-                </div>
-                <div class="future">
-
                 </div>
             </div>
         </div>
-    </div>
-</template>
+    </template>
     
-<div class="container">
-</div>
+    <div class="container">
+    </div>
+</body>
 </html>
