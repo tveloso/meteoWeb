@@ -25,8 +25,13 @@ function getWeather(url) {
 }
 
 function displayWeather(json){
-    let weather = new Weather(json);
-    weather.display();
+    if(json.city_info){
+        let weather = new Weather(json);
+        weather.display();
+    }
+    else{
+        alert('Météo indisponible pour cette ville');
+    }
 }
 
 
@@ -36,8 +41,8 @@ function onClickMap(e) {
         .setLatLng(e.latlng)
         .setContent("You clicked the map at " + e.latlng.toString())
         .openOn(mapClass.map);
-        mapClass.map.setView(e.latlng,8);
     if (confirm('Show weather ?')) {
+        mapClass.map.setView(e.latlng,8);
         gpsPoint = new GPSPoint(e.latlng.lat,e.latlng.lng);
         let url = gpsPoint.getUrlJson();
         console.log(url);
@@ -74,9 +79,10 @@ function displayOptions(json) {
             div.appendChild(clone);
             let select = document.querySelector("#townSelect");
             for(let key in json.cities){
-            let option = document.createElement("option");
-            option.text = json.cities[key].code+' '+json.cities[key].city;
-            select.add(option);
+                let option = document.createElement("option");
+                //option.value = json.cities[key];
+                option.text = json.cities[key].code+' '+json.cities[key].city;
+                select.add(option);
             }
             // Supprimer le onchange dans le html du coup
             select.addEventListener('change', (e) => {
@@ -90,11 +96,12 @@ function displayOptions(json) {
 }
 
 function onChangeSelectedTownWeather(e) {
+    debugger;
     const selectedTown = e.target.value;
     let filteredCities = [];
     let town;
     if (jsonData && Array.isArray(jsonData.cities) && jsonData.cities.length > 0) {
-        filteredCities = jsonData.cities.filter(city => selectedTown.substr(6) === city.city);
+        filteredCities = jsonData.cities.filter(city => selectedTown.substr(6) === city.city).filter(city => selectedTown.substr(0,2) !== city.code.toString().substr(0,2));
         
     } else {
         console.error(`Error : ${jsonData} ${jsonData.cities}`);
