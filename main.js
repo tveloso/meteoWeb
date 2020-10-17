@@ -1,5 +1,16 @@
 var selectedTown;
+
 const urlMeteo = 'https://www.prevision-meteo.ch/services/json/';
+
+var jsonData;
+
+const mapClass = new Map();
+mapClass.map.on('click', onClickMap);
+
+let buttonGo = document.querySelector("#go");
+buttonGo.addEventListener('click', (e) => {
+    getTownsVicopo();
+});
 
 function getTownWeather(town) {
     if (!town) {
@@ -18,9 +29,7 @@ function displayWeather(json){
     weather.display();
 }
 
-var jsonData;
-const mapClass = new Map();
-mapClass.map.on('click', onClickMap);
+
 
 function onClickMap(e) {
     mapClass.popup
